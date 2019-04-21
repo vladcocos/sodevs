@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "793397135006",
+    "firebase_url": "https://sodevs-d4cba.firebaseio.com",
+    "project_id": "sodevs-d4cba",
+    "storage_bucket": "sodevs-d4cba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:793397135006:android:fa8be2f28847ca4e",
+        "android_client_info": {
+          "package_name": "com.example.sodevs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "793397135006-ocd5mjr2qm7lhbhg487fdghv0870601d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtDjbvlZxSAHC43cmPj_-4XfrnQ7x6QJk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "793397135006-ocd5mjr2qm7lhbhg487fdghv0870601d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

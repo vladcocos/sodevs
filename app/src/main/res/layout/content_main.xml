@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:gravity="center">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/enter_screen_bg"
+        android:scaleType="centerCrop"/>
+
+    <Button
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="200dp"
+        android:background="@color/colorPrimary"
+        android:text="@string/sign_up"
+        android:textAllCaps="true"
+        android:onClick="goToSignUpScreen"
+        android:textSize="15sp" />
+
+    <Button
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/colorPrimary"
+        android:textSize="15sp"
+        android:textAllCaps="true"
+        android:onClick="goToSignInScreen"
+        android:text="@string/sign_in"/>
+
+</LinearLayout>
