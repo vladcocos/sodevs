@@ -48,8 +48,6 @@ public class SignUp extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        verifyEmailAddress("");
-
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

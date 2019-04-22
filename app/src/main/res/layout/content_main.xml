@@ -4,14 +4,14 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="@drawable/road_wallpaper"
     android:gravity="center">
 
     <ImageView
-        android:layout_width="100dp"
+        android:layout_width="160dp"
         android:layout_height="100dp"
-        android:src="@drawable/enter_screen_bg"
-        android:scaleType="centerCrop"/>
+        android:src="@drawable/logo"
+        android:scaleType="fitCenter"/>
 
     <Button
         style="@style/Widget.MaterialComponents.Button"
@@ -22,7 +22,6 @@
         android:layout_marginTop="200dp"
         android:background="@color/colorPrimary"
         android:text="@string/sign_up"
-        android:textAllCaps="true"
         android:onClick="goToSignUpScreen"
         android:textSize="15sp" />
 
@@ -35,7 +34,6 @@
         android:layout_marginTop="30dp"
         android:background="@color/colorPrimary"
         android:textSize="15sp"
-        android:textAllCaps="true"
         android:onClick="goToSignInScreen"
         android:text="@string/sign_in"/>
 
