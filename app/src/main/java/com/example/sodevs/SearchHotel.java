@@ -2,6 +2,7 @@ package com.example.sodevs;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,12 +10,16 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,10 +28,16 @@ import java.util.List;
 import java.util.Locale;
 
 public class SearchHotel extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    private CurrentSearch currentSearch;
+    private DatabaseReference mDatabase;
+    private List<String> locations;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_hotel);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         final TextView checkInDate = findViewById(R.id.check_in_date);
         final TextView checkOutDate = findViewById(R.id.check_out_date);
@@ -38,6 +49,8 @@ public class SearchHotel extends AppCompatActivity implements AdapterView.OnItem
         final String dateFormat = "dd/MM/yyyy";
         final SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.US);
         final TextView signOut = findViewById(R.id.sign_out);
+        currentSearch = CurrentSearch.getInstance();
+        locations = new ArrayList<>();
 
         Spinner mLocationSpinner;
         ArrayAdapter<String> mLocationSpinnerAdapter;
@@ -63,8 +76,6 @@ public class SearchHotel extends AppCompatActivity implements AdapterView.OnItem
                 calendar.set(Calendar.YEAR, year);
                 calendar.set(Calendar.MONTH, month);
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                String dateFormat = "dd/MM/yyyy";
-                SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.US);
                 checkOutDate.setText(sdf.format(calendar.getTime()));
             }
         };
@@ -101,7 +112,9 @@ public class SearchHotel extends AppCompatActivity implements AdapterView.OnItem
             @Override
             public void onClick(View v) {
                 int currentValue = Integer.parseInt(peopleCurrent.getText().toString());
-                peopleCurrent.setText(String.valueOf(currentValue + 1));
+                if (currentValue < 30) {
+                    peopleCurrent.setText(String.valueOf(currentValue + 1));
+                }
             }
         });
 
@@ -119,6 +132,9 @@ public class SearchHotel extends AppCompatActivity implements AdapterView.OnItem
                 }
 
                 if (isAccepted) {
+                    currentSearch.setCheckInDate(checkInDate.getText().toString());
+                    currentSearch.setCheckOutDate(checkOutDate.getText().toString());
+                    currentSearch.setPeople(Integer.parseInt(peopleCurrent.getText().toString()));
                     Intent intent = new Intent(SearchHotel.this, SelectHotel.class);
                     startActivity(intent);
                 }
@@ -137,7 +153,8 @@ public class SearchHotel extends AppCompatActivity implements AdapterView.OnItem
             }
         });
 
-        mLocationSpinnerDataSource = getLocations();
+        getLocations();
+        mLocationSpinnerDataSource = locations;
         mLocationSpinner = findViewById(R.id.location_spinner);
         mLocationSpinnerAdapter = new ArrayAdapter<>(
                 this,
@@ -147,31 +164,26 @@ public class SearchHotel extends AppCompatActivity implements AdapterView.OnItem
         mLocationSpinner.setOnItemSelectedListener(this);
     }
 
-    private List<String> getLocations() {
-        List<String> locations = new ArrayList<>();
+    private void getLocations() {
         locations.add("Select your location");
-        locations.add("Bucuresti");
-        locations.add("Predeal");
-        locations.add("Sinaia");
-        locations.add("Brasov");
-        locations.add("Constanta");
-        locations.add("Iasi");
-        locations.add("Sibiu");
-        locations.add("Cluj");
-        locations.add("Poiana Brasov");
-        locations.add("Azuga");
-        locations.add("Busteni");
-        locations.add("Bran");
-        return locations;
+        DatabaseReference locationsRef = FirebaseDatabase.getInstance().getReference().child("locations");
+        locationsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                    locations.add(dsp.getValue(String.class));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) { }
+        });
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (position > 0) {
-            Toast.makeText(
-                this,
-                "Selected " + getLocations().get(position),
-                Toast.LENGTH_LONG).show();
+            currentSearch.setLocation(locations.get(position));
         }
     }
 

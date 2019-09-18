@@ -17,23 +17,23 @@
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
         android:layout_marginTop="200dp"
         android:background="@color/colorPrimary"
         android:text="@string/sign_up"
         android:onClick="goToSignUpScreen"
-        android:textSize="15sp" />
+        android:textSize="16sp" />
 
     <Button
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
         android:layout_marginTop="30dp"
         android:background="@color/colorPrimary"
-        android:textSize="15sp"
+        android:textSize="16sp"
         android:onClick="goToSignInScreen"
         android:text="@string/sign_in"/>
 

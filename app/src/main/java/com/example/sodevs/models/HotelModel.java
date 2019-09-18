@@ -1,37 +1,84 @@
 package com.example.sodevs.models;
 
+import android.content.res.Resources;
+import android.widget.ImageView;
+
+import com.example.sodevs.R;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class HotelModel {
-    private String hotelName;
-    private int hotelImageResId;
-    private String hotelStayPrice;
+    private String name;
+    private String location;
+    private String description;
+    private int stayPrice;
+    private int imageResId;
+    private int roomsCount;
+    private List<HotelRoom> rooms;
+    private List<ImageView> images;
 
-    public HotelModel(String hotelName, int hotelImageResId, String hotelStayPrice) {
-        this.hotelName = hotelName;
-        this.hotelImageResId = hotelImageResId;
-        this.hotelStayPrice = "Price for your stay: " + hotelStayPrice;
+    public HotelModel(String name, String location, String description) {
+        this.name = name;
+        this.location = location;
+        this.description = description;
+        this.roomsCount = 0;
+        this.rooms = new ArrayList<>();
+        this.images = new ArrayList<>();
     }
 
-    public String getHotelName() {
-        return hotelName;
+    public void addRoom(String type, int people, int price) {
+        this.rooms.add(new HotelRoom(this.roomsCount, type, people, price));
+        roomsCount++;
     }
 
-    public void setHotelName(String hotelName) {
-        this.hotelName = hotelName;
+    public String getName() {
+        return name;
     }
 
-    public int getHotelImageResId() {
-        return hotelImageResId;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setHotelImageResId(int hotelImageResId) {
-        this.hotelImageResId = hotelImageResId;
+    public String getLocation() {
+        return location;
     }
 
-    public String getHotelStayPrice() {
-        return hotelStayPrice;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
-    public void setHotelStayPrice(String hotelStayPrice) {
-        this.hotelStayPrice = "Price for your stay: " + hotelStayPrice;
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<HotelRoom> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(List<HotelRoom> rooms) {
+        this.rooms = rooms;
+    }
+
+    public int getStayPrice() {
+        return stayPrice;
+    }
+
+    public void setStayPrice(int stayPrice) {
+        this.stayPrice = stayPrice;
+    }
+
+    public String getStayPriceText() { return "Lowest price for your stay: " + String.valueOf(stayPrice); }
+
+    public int getImageResId() {
+        return imageResId;
+    }
+
+    public void setImageResId(int imageResId) {
+        this.imageResId = imageResId;
     }
 }

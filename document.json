@@ -1,0 +1,25 @@
+{
+  "locations": [
+    "Sinaia",
+    "Predeal",
+    "Busteni"
+  ],
+  "hotels": {
+    "100": {
+      "name": "Hotel Regal",
+      "location": "Sinaia",
+      "rooms": {
+        "room_1": {
+          "type": "Single",
+          "people": 1,
+          "price": 120
+        },
+        "room_2": {
+          "type": "Double",
+          "people": 2,
+          "price": 190
+        }
+      }
+    }
+  }
+}

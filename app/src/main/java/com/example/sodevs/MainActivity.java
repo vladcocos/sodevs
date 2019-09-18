@@ -16,12 +16,17 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    private FirebaseUser currentUser;
+    private SignedInUser signedInUser;
 
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        Hotels.getInstance().createHotels();
+
         if (currentUser != null) {
+            signedInUser.setEmail(currentUser.getEmail());
             Intent intent = new Intent(this, SearchHotel.class);
             startActivity(intent);
         }
@@ -33,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
+        signedInUser = SignedInUser.getInstance();
     }
 
     public void goToSignUpScreen(View view) {

@@ -45,7 +45,7 @@ public class SignIn extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String emailAddress = emailInput.getText().toString();
+                final String emailAddress = emailInput.getText().toString();
                 String password = passwordInput.getText().toString();
                 boolean isValid = true;
 
@@ -96,9 +96,8 @@ public class SignIn extends AppCompatActivity {
 
     private void signInSuccessful(FirebaseUser user) {
         if (user != null) {
+            SignedInUser.getInstance().setEmail(user.getEmail());
             Intent intent = new Intent(this, SearchHotel.class);
-            intent.putExtra("firstname", user.getDisplayName());
-            intent.putExtra("email", user.getEmail());
             startActivity(intent);
         }
     }

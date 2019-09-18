@@ -16,9 +16,13 @@
     <string name="check_in_date">Check-in date:</string>
     <string name="check_out_date">Check-out date:</string>
     <string name="hotel">hotel</string>
-    <string name="adults">Adults:</string>
     <string name="people_text">People:</string>
     <string name="minus">-</string>
     <string name="plus">+</string>
     <string name="sign_out">Sign out</string>
+    <string name="hotel_image">hotel_image</string>
+    <string name="reserve">Reserve</string>
+    <string name="go_home">Go home</string>
+    <string name="please_rate_your_experience">Please rate your experience</string>
+    <string name="preferred_room_text">Select your preferred room (price per night):</string>
 </resources>
